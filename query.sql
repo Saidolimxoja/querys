@@ -429,15 +429,14 @@ limit 5
 
 select
   p.product_name,
-  MAX(od.quantity) as Sell_quantity
+  sum(od.quantity) as Sell_quantity
 from
-  orders o
-  join order_details od on od.order_id = o.order_id
+  order_details od
   join products p on p.product_id = od.product_id
 group by
   p.product_name
   order by Sell_quantity desc  
-limit 5 
+limit 5
 
 
 ----------------------------------------------31------------------------------------
