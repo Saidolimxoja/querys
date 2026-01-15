@@ -567,3 +567,18 @@ WHERE unit_price > (
     FROM products
 )
 ORDER BY unit_price asc;
+
+
+----------------------------39------------------------------
+
+Har bir kategoriya bo‘yicha eng qimmat mahsulot
+
+select
+  c.category_name , 
+  MAX(p.unit_price) as MAx_price 
+from
+  products p
+  join categories c on c.category_id = p.category_id
+  group by c.category_name
+
+  
