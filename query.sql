@@ -582,3 +582,22 @@ from
   group by c.category_name
 
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  daidbaibd
+  daljbdad
+  daljdbad
+  aadnoaidba
+  
