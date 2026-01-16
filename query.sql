@@ -581,23 +581,3 @@ from
   join categories c on c.category_id = p.category_id
   group by c.category_name
 
-аыаыа
-аы
-аы
-а
-ыа
-ыа
-ы
-а
-ыаы
-а
-
-ыа
-ы
-а
-ы
-а
-ы
-а
-ыа
-ыаы
