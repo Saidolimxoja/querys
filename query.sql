@@ -581,10 +581,23 @@ from
   join categories c on c.category_id = p.category_id
   group by c.category_name
 
+аыаыа
+аы
+аы
+а
+ыа
+ыа
+ы
+а
+ыаы
+а
 
-adadbaidb
-dabda
-abkad
-dnaldna
-dja;da
-daodb
+ыа
+ы
+а
+ы
+а
+ы
+а
+ыа
+ыаы
