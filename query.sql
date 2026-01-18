@@ -581,3 +581,56 @@ from
   join categories c on c.category_id = p.category_id
   group by c.category_name
 
+----------------------------40-----------------------------
+
+ Har bir supplier bo‘yicha eng arzon mahsulot 
+select
+  s.company_name,
+  MIN(p.unit_price) as MIN_price
+from
+  suppliers s
+  join products p on p.supplier_id = s.supplier_id
+group by
+  s.company_name  
+
+-------------------------------41-------------------------------
+  Har bir mijoz bo‘yicha eng so‘nggi buyurtma sanasi
+select
+  c.customer_id,
+  MAX(o.order_date) as Last_order_date
+from
+  customers c
+  join orders o on o.customer_id = c.customer_id
+group by
+  c.customer_id
+-------------------------------42-------------------------------
+  Har bir xodim bo‘yicha eng kam tushum keltirgan mijoz
+  
+select  
+  e.first_name,
+  c.customer_id,
+  SUM(od.unit_price * od.quantity * (1 - od.discount)) as TOTAL
+from
+  employees e
+  join orders o on o.employee_id = e.employee_id
+  join customers c on c.customer_id = o.customer_id
+  join order_details od on od.order_id = o.order_id
+group by
+  e.first_name,
+  c.customer_id
+order by
+  TOTAL asc
+
+limit 1 
+
+-------------------------------43-------------------------------
+
+Har bir shipper (tashuvchi) nechta buyurtma yetkazgan?
+
+select
+    s.company_name,
+    count(o.order_id) as total_orders
+from shippers s
+join orders o on s.shipper_id = o.ship_via
+group by  s.company_name
+order by total_orders desc;
