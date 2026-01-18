@@ -670,3 +670,36 @@ limit 2
 
 
 -------------------------------46-------------------------------
+Har bir mamlakatda nechta mijoz bor va ularning umumiy buyurtmalari soni qancha
+
+SELECT 
+    c.country,
+    COUNT(DISTINCT o.customer_id) as customer_count,
+    COUNT(o.order_id) as total_orders
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.country
+ORDER BY customer_count DESC;
+
+-------------------------------47-------------------------------
+Eng yaxshi sotuvchi xodim (employee) kim? Har bir xodimning:
+
+    1.Necha buyurtma qabul qilgan
+
+    2.Jami savdo summasi (quantity * price * (1-discount))
+
+    3.Ortacha check summasi
+
+   SELECT 
+    e.first_name || ' ' || e.last_name as employee_name,
+    COUNT(DISTINCT o.order_id) as total_orders,
+    Round(SUM(od.quantity * od.unit_price * (1 - od.discount))) as total_sales,
+    Round(AVG(od.quantity * od.unit_price * (1 - od.discount))) as avg_order_value
+FROM employees e
+JOIN orders o ON e.employee_id = o.employee_id
+JOIN order_details od ON o.order_id = od.order_id
+GROUP BY e.employee_id
+ORDER BY total_sales DESC;
+
+
+-------------------------------48-------------------------------
