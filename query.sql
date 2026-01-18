@@ -527,17 +527,17 @@ limit 1
  Eng ko‘p sotilgan kategoriya
 
 
-select
-  c.category_name,
-  count(od.order_id) as TOTAL_orders
-from
-  order_details od
-  join products p on p.product_id = od.product_id
-  join categories c on c.category_id = p.category_id
-group by
-  c.category_name
-order by
-  TOTAL_orders DESC
+SELECT 
+    c.category_name,
+    SUM(od.quantity) as total_sold_units,
+    COUNT(DISTINCT od.order_id) as total_orders
+FROM order_details od
+JOIN products p ON p.product_id = od.product_id
+JOIN categories c ON c.category_id = p.category_id
+GROUP BY c.category_name
+ORDER BY total_sold_units DESC;
+
+fix it was wrong ; 
 
 
 ----------------------------------------------------37--------------------------------------------
@@ -555,7 +555,7 @@ order by REVENUE DESC
 
 ---------------------------------------------------38---------------------------------------------
 
- O‘rtacha narxdan qimmat mahsulotlar
+ Ortacha narxdan qimmat mahsulotlar
 
 SELECT
     product_id,
@@ -571,7 +571,7 @@ ORDER BY unit_price asc;
 
 ----------------------------39------------------------------
 
-Har bir kategoriya bo‘yicha eng qimmat mahsulot
+Har bir kategoriya boyicha eng qimmat mahsulot
 
 select
   c.category_name , 
@@ -583,7 +583,7 @@ from
 
 ----------------------------40-----------------------------
 
- Har bir supplier bo‘yicha eng arzon mahsulot 
+ Har bir supplier boyicha eng arzon mahsulot 
 select
   s.company_name,
   MIN(p.unit_price) as MIN_price
@@ -594,7 +594,7 @@ group by
   s.company_name  
 
 -------------------------------41-------------------------------
-  Har bir mijoz bo‘yicha eng so‘nggi buyurtma sanasi
+  Har bir mijoz boyicha eng songgi buyurtma sanasi
 select
   c.customer_id,
   MAX(o.order_date) as Last_order_date
@@ -604,8 +604,8 @@ from
 group by
   c.customer_id
 -------------------------------42-------------------------------
-  Har bir xodim bo‘yicha eng kam tushum keltirgan mijoz
-  
+  Har bir xodim boyicha eng kam tushum keltirgan mijoz
+
 select  
   e.first_name,
   c.customer_id,
@@ -634,3 +634,39 @@ from shippers s
 join orders o on s.shipper_id = o.ship_via
 group by  s.company_name
 order by total_orders desc;
+
+-------------------------------44-------------------------------
+  Har bir mijoz boyicha ortacha buyurtma summasi
+
+select
+  c.customer_id,
+  AVG(od.unit_price * od.quantity * (1 - od.discount)) as AVERAGE_ORDER_AMOUNT
+from
+  customers c
+  join orders o on o.customer_id = c.customer_id
+  join order_details od on od.order_id = o.order_id
+group by
+  c.customer_id 
+
+-------------------------------45-------------------------------
+
+agar mijoz buyurtma bermagan bolsa, uni ham korsatish
+
+"agar buyurtma berganlarni chiqazsak 89 jami lekn bizning customers TABLE da 91 ta mijoz bor"
+
+SELECT
+  c.customer_id,
+  MAX(o.order_date) as Last_order_date,
+  COUNT(o.order_id) as order_count
+FROM
+  customers c
+  LEFT JOIN orders o ON c.customer_id = o.customer_id 
+GROUP BY
+  c.customer_id
+ORDER BY 
+  Last_order_date asc nulls first ,
+  c.customer_id
+limit 2
+
+
+-------------------------------46-------------------------------
