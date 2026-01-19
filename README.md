@@ -64,3 +64,26 @@
 48. Har bir mijozning birinchi buyurtma sanasi
 49. Oxirgi 3 oyda sotilmagan mahsulotlar -
 50. Har bir kategoriya bo‘yicha eng qimmat mahsulot + 39 task
+
+
+
+---47---
+Eng yaxshi sotuvchi xodim (employee) kim? Har bir xodimning:
+
+    1.Necha buyurtma qabul qilgan
+
+    2.Jami savdo summasi (quantity * price * (1-discount))
+
+    3.Ortacha check summasi
+
+-------------------------------46-------------------------------
+Har bir mamlakatda nechta mijoz bor va ularning umumiy buyurtmalari soni qancha
+
+-------------------------------45-------------------------------
+
+agar mijoz buyurtma bermagan bolsa, uni ham korsatish
+
+"agar buyurtma berganlarni chiqazsak 89 jami lekn bizning customers TABLE da 91 ta mijoz bor"
+
+-------------------------------44-------------------------------
+  Har bir mijoz boyicha ortacha buyurtma summasi
